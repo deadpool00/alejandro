@@ -1,0 +1,20 @@
+# ============================================================
+#  Kokoro Web (TTS) — modo simple por IP:puerto
+# ------------------------------------------------------------
+#  Arrancar:   docker compose up -d
+#  Web:        http://IP_DE_TU_VPS:3000
+#  Detener:    docker compose down
+# ============================================================
+services:
+  kokoro-web:
+    image: ghcr.io/eduardolat/kokoro-web:latest
+    container_name: kokoro-web
+    ports:
+      - "${KW_PORT:-3000}:3000"
+    environment:
+      - KW_SECRET_API_KEY=${KW_SECRET_API_KEY:-}
+      - KW_PUBLIC_NO_TRACK=${KW_PUBLIC_NO_TRACK:-true}
+    volumes:
+      # Caché de modelos y voces descargadas (evita volver a bajarlas).
+      - ./kokoro-cache:/kokoro/cache
+    restart: unless-stopped

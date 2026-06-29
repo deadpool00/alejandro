@@ -1,0 +1,20 @@
+# Configuración de Caddy: HTTPS automático (Let's Encrypt) para Kokoro Web.
+# Las variables se toman del archivo .env (KW_DOMAIN, KW_ACME_EMAIL).
+
+{
+	# Email para Let's Encrypt (renovación / avisos de certificados).
+	email {$KW_ACME_EMAIL}
+}
+
+{$KW_DOMAIN} {
+	encode gzip
+	reverse_proxy kokoro-web:3000
+
+	# --- (Opcional) Proteger TODA la web con usuario y contraseña ---
+	# 1) Genera el hash de tu contraseña:
+	#      docker run --rm caddy:2-alpine caddy hash-password --plaintext 'TU_PASSWORD'
+	# 2) Descomenta las 3 líneas y pega el hash devuelto:
+	# basic_auth {
+	#     usuario HASH_AQUI
+	# }
+}

@@ -1,0 +1,43 @@
+# ============================================================
+#  Kokoro Web (TTS) — modo con DOMINIO + HTTPS automático (Caddy)
+# ------------------------------------------------------------
+#  Requisitos:
+#    - Un dominio/subdominio con registro A apuntando a la IP del VPS.
+#    - Puertos 80 y 443 abiertos en el VPS.
+#    - KW_DOMAIN y KW_ACME_EMAIL definidos en el archivo .env
+#
+#  Arrancar:   docker compose -f docker-compose.https.yml up -d
+#  Web:        https://TU_DOMINIO
+#  Detener:    docker compose -f docker-compose.https.yml down
+# ============================================================
+services:
+  kokoro-web:
+    image: ghcr.io/eduardolat/kokoro-web:latest
+    container_name: kokoro-web
+    # No se publica el puerto al exterior: solo Caddy habla con el contenedor
+    # a través de la red interna de Docker.
+    expose:
+      - "3000"
+    environment:
+      - KW_SECRET_API_KEY=${KW_SECRET_API_KEY:-}
+      - KW_PUBLIC_NO_TRACK=${KW_PUBLIC_NO_TRACK:-true}
+    volumes:
+      - ./kokoro-cache:/kokoro/cache
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: kokoro-caddy
+    depends_on:
+      - kokoro-web
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - KW_DOMAIN=${KW_DOMAIN}
+      - KW_ACME_EMAIL=${KW_ACME_EMAIL:-}
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy/data:/data
+      - ./caddy/config:/config
+    restart: unless-stopped

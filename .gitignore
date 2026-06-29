@@ -1,0 +1,13 @@
+# Variables de entorno con secretos (¡nunca subir!)
+.env
+
+# Caché de modelos y voces que descarga Kokoro
+kokoro-cache/
+
+# Datos de Caddy (certificados TLS, estado)
+caddy/data/
+caddy/config/
+
+# Sistema / varios
+.DS_Store
+*.log
