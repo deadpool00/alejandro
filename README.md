@@ -1,4 +1,13 @@
-# 🔊 Kokoro Web (TTS) — Despliegue en VPS
+# 🔊 Kokoro TTS — Despliegue en VPS
+
+> **➡️ Montaje activo para este VPS:** [`voiceover-studio/`](voiceover-studio/) — tu
+> "Voiceover Studio" (kokoro-fastapi + UI propia) integrado con **Traefik** en
+> `https://voz.akumalao.com`. **Empieza por ahí.**
+>
+> Lo de abajo es un **kit genérico alternativo** (kokoro-web + Caddy) por si algún día
+> quieres una interfaz todo-en-uno en un VPS sin Traefik.
+
+---
 
 Kit listo para instalar **[Kokoro Web](https://github.com/eduardolat/kokoro-web)** en tu VPS:
 una **interfaz web** de texto‑a‑voz basada en el modelo open‑source **Kokoro‑82M**.

@@ -1,0 +1,58 @@
+# ==========================================================================
+#  Voiceover Studio (Kokoro TTS) — integrado con tu Traefik existente
+# --------------------------------------------------------------------------
+#  - Backend:  kokoro-fastapi (API compatible con OpenAI, en CPU)
+#  - Frontend: nginx sirviendo tu index.html (la UI "Voiceover Studio")
+#              y haciendo de proxy de /v1/ hacia el backend.
+#  - Publicado por TU Traefik en https://${KOKORO_DOMAIN} con basic auth.
+#
+#  Requisitos en el VPS (ya los tenías):
+#    * Traefik corriendo, conectado a la red externa  root_web
+#    * entrypoint  websecure  (443) y un certresolver llamado  letsencrypt
+#    * DNS:  ${KOKORO_DOMAIN}  ->  IP del VPS
+#    * Archivo  .env  con KOKORO_DOMAIN y KOKORO_BASICAUTH (ver .env.example)
+#
+#  Arranque:   docker compose up -d
+# ==========================================================================
+services:
+  # ---- Backend: motor de voz Kokoro (API compatible con OpenAI) ----
+  kokoro-tts:
+    image: ghcr.io/remsky/kokoro-fastapi-cpu:latest   # opcional: fija una versión, p.ej. :v0.2.4
+    container_name: kokoro-tts
+    restart: unless-stopped
+    networks:
+      - kokoro
+    # Sin puertos publicados: solo el frontend lo usa por la red interna.
+
+  # ---- Frontend: tu "Voiceover Studio" + proxy a la API ----
+  kokoro-web:
+    image: nginx:alpine
+    container_name: kokoro-web
+    restart: unless-stopped
+    depends_on:
+      - kokoro-tts
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - kokoro          # para alcanzar al backend  kokoro-tts:8880
+      - web             # para que Traefik lo exponga
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=root_web"
+      # --- Router ---
+      - "traefik.http.routers.kokoroweb.rule=Host(`${KOKORO_DOMAIN}`)"
+      - "traefik.http.routers.kokoroweb.entrypoints=websecure"
+      - "traefik.http.routers.kokoroweb.tls=true"
+      - "traefik.http.routers.kokoroweb.tls.certresolver=letsencrypt"
+      - "traefik.http.services.kokoroweb.loadbalancer.server.port=80"
+      # --- Basic Auth (usuario/contraseña) ---
+      - "traefik.http.routers.kokoroweb.middlewares=kokoroweb-auth"
+      - "traefik.http.middlewares.kokoroweb-auth.basicauth.users=${KOKORO_BASICAUTH}"
+
+networks:
+  kokoro:
+    driver: bridge
+  web:
+    name: root_web
+    external: true

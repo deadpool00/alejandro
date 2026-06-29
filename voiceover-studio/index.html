@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kokoro TTS — Voiceover Studio</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --border:#2a2f3a;
+    --txt:#e6e9ef; --muted:#8b93a3; --accent:#6c8cff; --accent2:#4f6ef0;
+    --ok:#3ecf8e; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    min-height:100vh; display:flex; align-items:flex-start; justify-content:center; padding:32px 16px;
+  }
+  .wrap{width:100%; max-width:760px}
+  header{margin-bottom:24px}
+  h1{font-size:22px; margin:0 0 4px; font-weight:650; letter-spacing:-.3px}
+  .sub{color:var(--muted); font-size:13px}
+  .card{
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:var(--radius); padding:22px; margin-bottom:16px;
+  }
+  label{display:block; font-size:12px; color:var(--muted); margin:0 0 8px; text-transform:uppercase; letter-spacing:.5px}
+  textarea{
+    width:100%; min-height:140px; resize:vertical; background:var(--panel2);
+    border:1px solid var(--border); border-radius:10px; color:var(--txt);
+    padding:14px; font-size:15px; line-height:1.5; font-family:inherit;
+  }
+  textarea:focus{outline:none; border-color:var(--accent)}
+  .row{display:flex; gap:14px; flex-wrap:wrap; margin-top:18px}
+  .field{flex:1; min-width:160px}
+  select,input[type=range]{
+    width:100%; background:var(--panel2); border:1px solid var(--border);
+    border-radius:10px; color:var(--txt); padding:12px; font-size:14px; font-family:inherit;
+  }
+  select:focus{outline:none; border-color:var(--accent)}
+  .speed-val{color:var(--accent); font-weight:600}
+  .actions{display:flex; gap:12px; margin-top:22px; align-items:center; flex-wrap:wrap}
+  button{
+    background:var(--accent2); color:#fff; border:none; border-radius:10px;
+    padding:13px 22px; font-size:14px; font-weight:600; cursor:pointer; transition:.15s;
+  }
+  button:hover{background:var(--accent)}
+  button:disabled{opacity:.5; cursor:not-allowed}
+  .ghost{background:transparent; border:1px solid var(--border); color:var(--txt)}
+  .ghost:hover{background:var(--panel2)}
+  #status{font-size:13px; color:var(--muted); min-height:18px}
+  #status.ok{color:var(--ok)}
+  #status.err{color:#ff6b6b}
+  audio{width:100%; margin-top:18px; display:none}
+  audio.show{display:block}
+  .chars{font-size:11px; color:var(--muted); text-align:right; margin-top:6px}
+  .hint{font-size:11px; color:var(--muted); margin-top:6px; line-height:1.4}
+  .spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Voiceover Studio</h1>
+    <div class="sub">Kokoro TTS · EasyTheraNotes reels</div>
+  </header>
+
+  <div class="card">
+    <label for="text">Script</label>
+    <textarea id="text" placeholder="Paste your reel voiceover script here...">Stop spending hours on clinical notes. EasyTheraNotes turns your therapy sessions into SOAP notes in seconds.</textarea>
+    <div class="chars"><span id="count">0</span> chars</div>
+
+    <div class="row">
+      <div class="field">
+        <label for="voice">Voice</label>
+        <select id="voice">
+          <optgroup label="US Female">
+            <option value="af_bella">af_bella — warm</option>
+            <option value="af_heart">af_heart — soft</option>
+            <option value="af_nicole">af_nicole — gentle</option>
+            <option value="af_sarah">af_sarah — clear</option>
+            <option value="af_sky">af_sky — bright</option>
+          </optgroup>
+          <optgroup label="US Male">
+            <option value="am_michael">am_michael — neutral</option>
+            <option value="am_adam">am_adam — deep</option>
+            <option value="am_echo">am_echo — calm</option>
+          </optgroup>
+          <optgroup label="UK Female">
+            <option value="bf_emma">bf_emma — british</option>
+            <option value="bf_isabella">bf_isabella — british</option>
+          </optgroup>
+          <optgroup label="UK Male">
+            <option value="bm_george">bm_george — british</option>
+            <option value="bm_lewis">bm_lewis — british</option>
+          </optgroup>
+          <optgroup label="Blend (brand voice)">
+            <option value="af_bella+af_nicole">bella + nicole</option>
+            <option value="am_michael+am_adam">michael + adam</option>
+          </optgroup>
+        </select>
+        <div class="hint">Blends mix two voices for a unique brand timbre.</div>
+      </div>
+      <div class="field">
+        <label for="speed">Speed · <span class="speed-val" id="speedVal">1.0</span>x</label>
+        <input type="range" id="speed" min="0.5" max="1.5" step="0.05" value="1.0">
+        <div class="hint">Reels often read better at 1.05–1.15x.</div>
+      </div>
+      <div class="field">
+        <label for="format">Format</label>
+        <select id="format">
+          <option value="mp3">MP3</option>
+          <option value="wav">WAV (lossless)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="gen">Generate</button>
+      <button id="dl" class="ghost" disabled>Download</button>
+      <span id="status"></span>
+    </div>
+
+    <audio id="player" controls></audio>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const txt = $('text'), voice = $('voice'), speed = $('speed'),
+        fmt = $('format'), status = $('status'), player = $('player'),
+        genBtn = $('gen'), dlBtn = $('dl'), count = $('count'), speedVal = $('speedVal');
+
+  let lastBlobUrl = null, lastFmt = 'mp3';
+
+  const updateCount = () => count.textContent = txt.value.length;
+  txt.addEventListener('input', updateCount);
+  updateCount();
+  speed.addEventListener('input', () => speedVal.textContent = parseFloat(speed.value).toFixed(2));
+
+  function setStatus(msg, cls=''){ status.textContent = msg; status.className = cls; }
+
+  async function generate(){
+    const input = txt.value.trim();
+    if(!input){ setStatus('Write a script first.', 'err'); return; }
+
+    genBtn.disabled = true; dlBtn.disabled = true;
+    player.classList.remove('show');
+    setStatus('', '');
+    status.innerHTML = '<span class="spinner"></span>Generating…';
+
+    try{
+      // Same-origin call — Nginx proxies /v1/ to Kokoro internally
+      const res = await fetch('/v1/audio/speech', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          model:'kokoro',
+          input: input,
+          voice: voice.value,
+          speed: parseFloat(speed.value),
+          response_format: fmt.value
+        })
+      });
+      if(!res.ok){ throw new Error('HTTP '+res.status); }
+
+      const blob = await res.blob();
+      if(lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
+      lastBlobUrl = URL.createObjectURL(blob);
+      lastFmt = fmt.value;
+
+      player.src = lastBlobUrl;
+      player.classList.add('show');
+      dlBtn.disabled = false;
+      setStatus('Done · '+(blob.size/1024).toFixed(0)+' KB', 'ok');
+    }catch(e){
+      setStatus('Error: '+e.message+' — is Kokoro running?', 'err');
+    }finally{
+      genBtn.disabled = false;
+    }
+  }
+
+  function download(){
+    if(!lastBlobUrl) return;
+    const a = document.createElement('a');
+    a.href = lastBlobUrl;
+    const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+    a.download = 'voiceover-'+stamp+'.'+lastFmt;
+    a.click();
+  }
+
+  genBtn.addEventListener('click', generate);
+  dlBtn.addEventListener('click', download);
+  // Ctrl/Cmd+Enter to generate
+  txt.addEventListener('keydown', e => {
+    if((e.ctrlKey||e.metaKey) && e.key==='Enter') generate();
+  });
+</script>
+</body>
+</html>
