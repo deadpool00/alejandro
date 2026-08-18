@@ -14,11 +14,14 @@
     --accent-ink: #0F556B;
     --accent-soft: #E3EEF2;
     --chip-bg: #E9EEF3;
-    --code-bg: #F1F4F7;
     --good: #2E7D4F;
+    --good-soft: #E4F1E9;
+    --warn: #9A6B12;
+    --warn-soft: #F5EDDA;
+    --bad: #B3403C;
+    --bad-soft: #F7E7E6;
     --star: #B07818;
   }
-  :root:not([data-theme="light"]) { }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #12181F;
@@ -32,8 +35,12 @@
       --accent-ink: #7CC6DB;
       --accent-soft: #1C3540;
       --chip-bg: #243040;
-      --code-bg: #161D25;
       --good: #6DC392;
+      --good-soft: #1B3226;
+      --warn: #D9A84E;
+      --warn-soft: #362B14;
+      --bad: #E08A86;
+      --bad-soft: #3A1F1E;
       --star: #D9A84E;
     }
   }
@@ -49,8 +56,12 @@
     --accent-ink: #7CC6DB;
     --accent-soft: #1C3540;
     --chip-bg: #243040;
-    --code-bg: #161D25;
     --good: #6DC392;
+    --good-soft: #1B3226;
+    --warn: #D9A84E;
+    --warn-soft: #362B14;
+    --bad: #E08A86;
+    --bad-soft: #3A1F1E;
     --star: #D9A84E;
   }
 
@@ -64,34 +75,28 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 780px; margin: 0 auto; padding: 48px 20px 96px; }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 48px 20px 96px; }
 
   h1, h2, h3 { font-family: "Bricolage Grotesque", "Public Sans", sans-serif; text-wrap: balance; line-height: 1.15; }
-  h1 { font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 700; margin: 10px 0 12px; }
+  h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; margin: 10px 0 12px; }
   h2 { font-size: 1.45rem; font-weight: 700; margin: 0 0 6px; }
   h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 8px; }
   p { margin: 0 0 14px; }
   a { color: var(--accent-ink); }
+  code { font-family: "IBM Plex Mono", monospace; font-size: .85em; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
 
-  .eyebrow {
-    font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--accent-ink);
-  }
-  .lede { font-size: 1.08rem; color: var(--ink-2); max-width: 60ch; }
+  .eyebrow { font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); }
+  .lede { font-size: 1.05rem; color: var(--ink-2); max-width: 62ch; }
 
   header.hero { padding-bottom: 26px; border-bottom: 1px solid var(--line); margin-bottom: 34px; }
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .hero-meta span {
-    font-size: .8rem; font-weight: 600; color: var(--ink-2);
-    background: var(--chip-bg); border-radius: 999px; padding: 4px 12px;
-  }
-
-  .strategy { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 26px 0 6px; }
-  .strategy .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 16px 12px;
-  }
-  .strategy .card b { display: block; margin-bottom: 4px; font-size: .95rem; }
-  .strategy .card p { font-size: .87rem; color: var(--ink-2); margin: 0; }
+  .scorerow { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin-top: 20px; }
+  .bigscore { font-family: "Bricolage Grotesque", sans-serif; font-size: 3.4rem; font-weight: 700; line-height: 1; color: var(--bad); }
+  .bigscore small { font-size: 1.1rem; color: var(--ink-3); font-weight: 600; }
+  .verdict { flex: 1; min-width: 260px; font-size: .92rem; color: var(--ink-2); }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 20px; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+  .kpi b { display: block; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+  .kpi small { color: var(--ink-3); font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; }
 
   section { margin: 44px 0; }
   .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
@@ -102,11 +107,24 @@
   }
   .sec-sub { color: var(--ink-2); margin-top: -2px; }
 
-  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  .tag { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 9px; border-radius: 999px; margin-bottom: 8px; }
+  .tag.crit { color: var(--bad); background: var(--bad-soft); }
+  .tag.alto { color: var(--warn); background: var(--warn-soft); }
+  .tag.ok { color: var(--good); background: var(--good-soft); }
+
+  .actual {
+    border-left: 3px solid var(--bad); background: var(--bad-soft);
+    border-radius: 0 10px 10px 0; padding: 10px 16px; font-size: .9rem; margin: 0 0 12px;
+  }
+  .actual b { color: var(--bad); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
   .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
   th, td { text-align: left; padding: 10px 14px; border-top: 1px solid var(--line); vertical-align: top; }
-  thead th { border-top: none; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); }
-  td:first-child { font-weight: 600; white-space: nowrap; }
+  thead th { border-top: none; font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); }
+  td.sec-name { font-weight: 600; white-space: nowrap; }
+  td.nota { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+  td.nota.r { color: var(--bad); } td.nota.y { color: var(--warn); } td.nota.g { color: var(--good); }
 
   .copyblock { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 16px; overflow: hidden; }
   .copyblock.rec { border-color: var(--accent); }
@@ -121,7 +139,6 @@
     margin: 0; white-space: pre-wrap; word-break: break-word;
     font-family: "Public Sans", sans-serif; font-size: .93rem; line-height: 1.55; color: var(--ink);
   }
-  .cb-body pre.mono { font-family: "IBM Plex Mono", monospace; font-size: .85rem; }
   button.copy {
     font: 600 .78rem "Public Sans", sans-serif; letter-spacing: .02em;
     color: var(--accent-ink); background: transparent;
@@ -130,13 +147,16 @@
   button.copy:hover { background: var(--accent-soft); }
   button.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   button.copy.done { color: var(--good); border-color: var(--good); }
-
-  .field-note { font-size: .84rem; color: var(--ink-3); margin: -8px 0 18px; }
-
-  .exp-meta { display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; font-size: .9rem; margin: 0 0 12px; }
-  .exp-meta dt { color: var(--ink-3); }
-  .exp-meta dd { margin: 0; font-weight: 600; }
+  .chars { color: var(--ink-3); font-size: .78rem; font-family: "IBM Plex Mono", monospace; margin: -8px 0 18px; }
   .ph { color: var(--star); font-weight: 700; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .card h3 { margin-top: 0; }
+  .card ul { margin: 0; padding-left: 18px; font-size: .9rem; }
+  .card li { margin-bottom: 6px; }
+  .card.win { border-left: 3px solid var(--good); }
 
   .chips { display: flex; flex-wrap: wrap; gap: 7px; }
   .chip { font-size: .84rem; font-weight: 500; background: var(--chip-bg); border-radius: 999px; padding: 4px 12px; }
@@ -152,9 +172,10 @@
   ul.clean li { margin-bottom: 6px; }
 
   .checklist { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px; }
+  .checklist .group { font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); padding: 10px 12px 2px; }
   .checklist label {
-    display: flex; gap: 12px; align-items: flex-start; padding: 9px 12px;
-    border-radius: 8px; cursor: pointer; font-size: .95rem;
+    display: flex; gap: 12px; align-items: flex-start; padding: 8px 12px;
+    border-radius: 8px; cursor: pointer; font-size: .94rem;
   }
   .checklist label:hover { background: var(--surface-2); }
   .checklist input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
@@ -165,161 +186,185 @@
 
 <div class="wrap">
   <header class="hero">
-    <div class="eyebrow">Guía de mejora · linkedin.com/in/raul-la-o</div>
+    <div class="eyebrow">Auditoría + plan de mejora · linkedin.com/in/raul-la-o</div>
     <h1>LinkedIn de Raúl La O</h1>
-    <p class="lede">Propuesta completa para convertir tu perfil en el de un <strong>Full-Stack Developer &amp; SaaS Founder</strong>. Cada bloque tiene un botón <em>Copiar</em> para pegarlo directo en LinkedIn. Los marcadores <span class="ph">[…]</span> son datos que solo tú tienes (fechas, estudios).</p>
-    <div class="hero-meta">
-      <span>Miami / South Florida</span>
-      <span>React · Node · AWS · IA</span>
-      <span>~45 min de implementación</span>
+    <p class="lede">Basado en la <strong>lectura real de tu perfil</strong> (18 ago 2026) fusionada con el plan de mejora. Formato: <em>así lo tienes → así debería quedar</em>, con botón <em>Copiar</em> en cada bloque. Los marcadores <span class="ph">[…]</span> son métricas que solo tú tienes.</p>
+    <div class="scorerow">
+      <div class="bigscore">31<small>/100</small></div>
+      <div class="verdict"><b>Veredicto:</b> el perfil funciona como currículum a medias, no como activo comercial. Tienes lo más difícil — un producto real y experiencia dentro del sector al que vendes — pero nada de eso se comunica en los 3 segundos de un visitante: faltan "Acerca de" y "Destacados", el titular no dice qué haces por quién, y el perfil está solo en español cuando tu cliente busca en inglés.</div>
     </div>
-    <div class="strategy">
-      <div class="card">
-        <b>Perfil principal en inglés</b>
-        <p>Los reclutadores en USA buscan en inglés. Crea además el perfil secundario en español (Add profile in another language).</p>
-      </div>
-      <div class="card">
-        <b>Identidad clara</b>
-        <p>No "busco cualquier trabajo": construyes productos web completos, de la idea a producción.</p>
-      </div>
-      <div class="card">
-        <b>EasyTheraNotes al frente</b>
-        <p>Un SaaS HIPAA real, en producción, hecho por una persona, vale más que cualquier certificado. Debe dominar el perfil.</p>
-      </div>
+    <div class="kpis">
+      <div class="kpi"><small>Contactos</small><b>21</b></div>
+      <div class="kpi"><small>Seguidores</small><b>23</b></div>
+      <div class="kpi"><small>Vistas / 7 días</small><b>9</b></div>
+      <div class="kpi"><small>Búsquedas / 7 días</small><b>2</b></div>
+      <div class="kpi"><small>Impresiones / 7 días</small><b>8</b></div>
     </div>
   </header>
 
   <section>
-    <div class="sec-head"><span class="sec-num">01</span><h2>Básicos del perfil</h2></div>
+    <div class="sec-head"><span class="sec-num">01</span><h2>Diagnóstico por sección</h2></div>
     <div class="table-scroll">
       <table>
-        <thead><tr><th>Elemento</th><th>Qué hacer</th></tr></thead>
+        <thead><tr><th>Sección</th><th>Estado actual</th><th>Nota</th></tr></thead>
         <tbody>
-          <tr><td>URL personalizada</td><td>Cambiar <code>raul-la-o-814b042a2</code> → <code>raul-la-o</code> o <code>raul-lao-dev</code> (Perfil → Editar URL pública).</td></tr>
-          <tr><td>Foto</td><td>Fondo neutro, buena luz, de hombros hacia arriba, sin filtros. Camisa simple; no hace falta traje.</td></tr>
-          <tr><td>Banner</td><td>Nada genérico: "Full-Stack Developer · React · Node · AWS · AI" con una captura sutil de EasyTheraNotes de fondo. En Canva, 1584×396 px, 10 minutos.</td></tr>
-          <tr><td>Ubicación</td><td>Miami, Florida, United States.</td></tr>
-          <tr><td>Sector</td><td>Software Development.</td></tr>
-          <tr><td>Open to work</td><td>Solo si buscas empleo, y visible <em>solo para reclutadores</em> — no debilites la imagen de founder ante clientes.</td></tr>
-          <tr><td>Sitio web</td><td>Añadir <a href="https://easytheranotes.com">easytheranotes.com</a> en la info de contacto.</td></tr>
+          <tr><td class="sec-name">Acerca de</td><td>No existe. Es la sección con más peso en el buscador de LinkedIn y en la decisión del visitante.</td><td class="nota r">0/10</td></tr>
+          <tr><td class="sec-name">Destacados</td><td>Ausente. Sin enlace a easytheranotes.com, sin demo. El visitante interesado no tiene a dónde ir.</td><td class="nota r">0/10</td></tr>
+          <tr><td class="sec-name">Recomendaciones</td><td>Cero. Trabajas en dos centros de salud conductual y tienes usuarios del producto: hay al menos 5 personas que podrían escribirte una hoy.</td><td class="nota r">0/10</td></tr>
+          <tr><td class="sec-name">Red</td><td>21 contactos / 23 seguidores — por debajo del umbral donde LinkedIn distribuye contenido. 8 impresiones en 7 días lo confirman.</td><td class="nota r">2/10</td></tr>
+          <tr><td class="sec-name">Configuración</td><td>Badge público "en busca de empleo" activo siendo Founder &amp; CEO; URL con sufijo aleatorio; perfil solo en español.</td><td class="nota r">2/10</td></tr>
+          <tr><td class="sec-name">Titular</td><td><code>EasyTheraNotes| IA | Marketing|Automatización en N8N| AWS</code> — 57 de 220 caracteres, sin propuesta de valor ni las palabras que busca tu comprador.</td><td class="nota r">3/10</td></tr>
+          <tr><td class="sec-name">Aptitudes</td><td>15 declaradas, sin validaciones; las fijadas no son por las que quieres aparecer.</td><td class="nota r">3/10</td></tr>
+          <tr><td class="sec-name">Foto y portada</td><td>Foto casual con lanyard; portada de stock ("marketing / strategy / business") — espacio de marca desperdiciado.</td><td class="nota y">4/10</td></tr>
+          <tr><td class="sec-name">Actividad</td><td>Publicas (bien), pero mayormente reposts de terceros; tu buen contenido vive en la página de empresa, con una fracción del alcance.</td><td class="nota y">4/10</td></tr>
+          <tr><td class="sec-name">Experiencia</td><td>3 puestos; ETN con descripción decente pero como "Profesional independiente"; los 2 de coordinador de redes están vacíos — y son tu prueba de conocer el sector.</td><td class="nota y">5/10</td></tr>
+          <tr><td class="sec-name">Educación</td><td>MBA en Marketing Digital (NUC University) bien descrito. La sección más sólida.</td><td class="nota g">7/10</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">02</span><h2>Titular (headline)</h2></div>
-    <p class="sec-sub">Es el campo que más pesa en las búsquedas. Máximo 220 caracteres.</p>
-
-    <div class="copyblock rec">
-      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ Recomendada</span> · Founder + Developer</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Full-Stack Developer | Founder @ EasyTheraNotes — HIPAA-compliant AI platform for mental health professionals | React · TypeScript · Node.js · AWS · OpenAI</pre></div>
-    </div>
-    <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Opción B · Orientada a empleo</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Full-Stack Developer | React · TypeScript · Node.js · AWS (Cognito, DynamoDB, S3) · Stripe · OpenAI | Building production SaaS end-to-end</pre></div>
-    </div>
-    <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Opción C · Bilingüe</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Full-Stack Developer &amp; SaaS Founder | React · Node · AWS · AI | Construyo productos web de punta a punta — from idea to production</pre></div>
-    </div>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Los 5 arreglos que más mueven la aguja</h2></div>
+    <ul class="clean">
+      <li><span class="tag crit">Crítico · 2 min</span><br><strong>Quita el badge público "en busca de empleo".</strong> Le pides a un director de clínica que confíe su documentación a tu plataforma mientras tu perfil anuncia que buscas trabajo — un founder buscando empleo se lee como un founder que va a cerrar. Si lo necesitas, déjalo <em>visible solo para reclutadores</em>.</li>
+      <li><span class="tag crit">Crítico · 15 min</span><br><strong>Escribe el "Acerca de".</strong> Texto listo en la sección 04.</li>
+      <li><span class="tag crit">Crítico · 5 min</span><br><strong>Perfil principal en inglés, español como secundario.</strong> Tu cliente busca "AI SOAP notes", "therapy EHR", "clinical documentation" — en inglés. Solo en español no apareces en ninguna de esas búsquedas. La versión en español cubre el mercado hispano de South Florida.</li>
+      <li><span class="tag alto">Alto · 20 min/sem</span><br><strong>Red antes que contenido.</strong> Con 21 contactos, el mejor post de tu vida lo ven 8 personas. Meta: 500+ en 90 días, todos del nicho (dueños de group practices, LCSW/LMHC, directores clínicos, administradores en Florida). 15–20 solicitudes/día con nota breve sin pitch.</li>
+      <li><span class="tag alto">Alto · 10 min</span><br><strong>Publica desde tu perfil personal, no desde la página de ETN.</strong> Tu contenido es bueno (el post de lenguaje clínico, el framework SOAP de 4 frases), pero las páginas de empresa alcanzan una fracción de un perfil personal. Primero tú, en primera persona; luego comparte la página. Y cero reposts de terceros 30 días.</li>
+    </ul>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">03</span><h2>Acerca de (About)</h2></div>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Titular</h2></div>
+    <div class="actual"><b>Actual:</b> <code>EasyTheraNotes| IA | Marketing|Automatización en N8N| AWS</code> — lista de tecnologías sin espacios, 57/220 caracteres, sin "therapist", "SOAP notes" ni "mental health".</div>
+
+    <div class="copyblock rec">
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ Recomendada</span> · Venta (perfil en inglés)</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Founder &amp; CEO @ EasyTheraNotes | AI SOAP Notes &amp; HIPAA-Compliant EHR for Therapists | Cut documentation from 13 hrs/week to minutes | Mental Health Tech | AWS + n8n</pre></div>
+    </div>
+    <p class="chars">165/220 · incluye: SOAP notes, HIPAA, EHR, therapists, mental health tech</p>
 
     <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Inglés · perfil principal</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>I build complete web products — from the first line of code to production, payments, and real users.
-
-I'm the founder and sole developer of EasyTheraNotes (easytheranotes.com), a HIPAA-compliant SaaS platform that helps mental health professionals generate clinical documentation with AI. I designed and built the entire product:
-
-• Frontend in React + TypeScript, backend in Node.js/Express on AWS
-• AI pipeline with OpenAI GPT-4o and Whisper for audio-to-SOAP-note generation
-• Telehealth video sessions (AWS Chime SDK), e-signatures, scheduling, and income tracking
-• Stripe subscriptions, referral system, and a full admin panel with usage, revenue, and AI-cost analytics
-• Infrastructure on AWS: Cognito, DynamoDB, S3, SES, SNS, Amplify, EC2
-
-Beyond my own product, I've delivered web projects for real businesses: corporate sites, an LMS, a time-clock system, internal tools, and self-hosted AI services (text-to-speech with Docker, Traefik, and FastAPI).
-
-What I bring: I don't just write code — I ship. I handle architecture, security, integrations (Stripe, QuickBooks, OpenAI, n8n), deployment, and everything in between.
-
-Open to full-stack opportunities and freelance projects.
-📩 laoraulalejandrocipre@gmail.com</pre></div>
+      <div class="cb-bar"><span class="cb-label">Opción B · Mercado hispano (perfil en español)</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Founder @ EasyTheraNotes | Notas SOAP con IA y EHR HIPAA para terapeutas | Documentación clínica en minutos, no en horas | Salud mental + IA | South Florida</pre></div>
     </div>
+    <p class="chars">154/220</p>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Opción C · Si priorizas conseguir empleo dev</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Full-Stack Developer &amp; Founder @ EasyTheraNotes | React · TypeScript · Node.js · AWS · OpenAI | Built a HIPAA-compliant SaaS end-to-end, solo</pre></div>
+    </div>
+    <p class="chars">Úsala solo si tu prioridad es que te contraten como developer; para vender ETN, la A.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Acerca de (About)</h2></div>
+    <div class="actual"><b>Actual:</b> la sección no existe.</div>
+
+    <div class="copyblock rec">
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★</span> Inglés · perfil principal</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Therapists spend an average of 13.5 hours a week on documentation. That's a full workday lost to charting nobody reads except auditors.
+
+I built EasyTheraNotes to give that day back.
+
+It's an AI-powered, HIPAA-compliant platform that turns a recorded session into a complete, defensible SOAP note in minutes — plus everything else a practice actually needs, in one place:
+
+• AI clinical notes across 5 specialties (Therapy, TCM/Case Management, Psychology, PSR Group Notes, Prior Authorizations)
+• Auto-generated Prior Authorizations for Florida Medicaid MCOs
+• HIPAA-compliant telehealth
+• E-signatures with a full audit trail
+• Smart scheduling and an income tracker with tax estimates
+
+All of it for $45/month. No add-ons, no per-specialty charges. SimplePractice charges $79–99. TherapyNotes charges $69.
+
+Why I'm the one building this: I don't come to behavioral health from the outside. I've spent the last two years running social media and marketing for two mental health organizations in Florida — Multilingual Psychotherapy Centers and Legacy Behavioral Health Center. I've watched clinicians chart at 10 PM. I've seen what a denied prior auth does to a caseload. The product is built around problems I saw first, not problems I read about.
+
+On the technical side, I designed and built the entire platform myself: React + TypeScript frontend, Node.js backend, AWS infrastructure (Cognito, DynamoDB, Chime, Lambda), OpenAI for the AI pipeline, n8n for automation — and I'm finishing an MBA in Digital Marketing at NUC University.
+
+If you run a private practice or a group practice and documentation is eating your evenings, I'd like to hear how you're handling it — even if you never become a customer.
+
+7-day free trial, no credit card: easytheranotes.com</pre></div>
+    </div>
+    <p class="chars">≈1.850/2.600 caracteres · verifica los precios de SimplePractice/TherapyNotes antes de publicar — cambian.</p>
 
     <div class="copyblock">
       <div class="cb-bar"><span class="cb-label">Español · perfil secundario</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Construyo productos web completos: desde la primera línea de código hasta producción, pagos y usuarios reales.
+      <div class="cb-body"><pre>Un terapeuta dedica en promedio 13,5 horas a la semana a documentación. Un día entero de trabajo perdido en notas que solo lee un auditor.
 
-Soy fundador y único desarrollador de EasyTheraNotes (easytheranotes.com), una plataforma SaaS HIPAA-compliant que ayuda a profesionales de salud mental a generar documentación clínica con IA. Diseñé y construí todo el producto:
+Construí EasyTheraNotes para devolverle ese día.
 
-• Frontend en React + TypeScript, backend en Node.js/Express sobre AWS
-• Pipeline de IA con OpenAI GPT-4o y Whisper: de audio a nota clínica SOAP
-• Telehealth por video (AWS Chime SDK), firmas electrónicas, calendario y control de ingresos
-• Suscripciones con Stripe, sistema de referidos y panel de administración completo con analítica de uso, ingresos y costos de IA
-• Infraestructura en AWS: Cognito, DynamoDB, S3, SES, SNS, Amplify, EC2
+Es una plataforma con IA, HIPAA-compliant, que convierte una sesión grabada en una nota SOAP completa y defendible en minutos. Y con todo lo demás que una práctica necesita, en un solo lugar:
 
-Además he entregado proyectos web para negocios reales: sitios corporativos, un LMS, sistema de control de horarios, herramientas internas y servicios de IA self-hosted (texto-a-voz con Docker, Traefik y FastAPI).
+• Notas clínicas con IA en 5 especialidades (Terapia, TCM/Case Management, Psicología, Notas Grupales PSR, Prior Authorizations)
+• Prior Authorizations automáticas para las MCO de Florida Medicaid
+• Telehealth HIPAA-compliant
+• Firmas electrónicas con audit trail completo
+• Calendario inteligente y control de ingresos con estimación de impuestos
 
-Lo que aporto: no solo escribo código — entrego producto. Manejo arquitectura, seguridad, integraciones (Stripe, QuickBooks, OpenAI, n8n) y despliegue.
+Todo por $45 al mes. Sin add-ons ni cargos por especialidad. SimplePractice cobra $79–99. TherapyNotes cobra $69.
 
-Abierto a oportunidades full-stack y proyectos freelance.
-📩 laoraulalejandrocipre@gmail.com</pre></div>
+Por qué lo construyo yo: no llego a la salud conductual desde afuera. Llevo dos años llevando marketing y redes para dos organizaciones de salud mental en Florida — Multilingual Psychotherapy Centers y Legacy Behavioral Health Center. He visto a clínicos documentando a las 10 de la noche y lo que una autorización denegada le hace a un caseload. El producto resuelve problemas que vi primero, no que leí.
+
+En lo técnico, diseñé y construí toda la plataforma yo mismo: React + TypeScript, Node.js, AWS (Cognito, DynamoDB, Chime, Lambda), OpenAI para el pipeline de IA y n8n para automatización — y estoy terminando un MBA en Marketing Digital en NUC University.
+
+Si diriges una práctica privada o un group practice y la documentación te está comiendo las tardes, me interesa saber cómo lo estás manejando — aunque nunca seas cliente.
+
+Prueba gratis de 7 días, sin tarjeta: easytheranotes.com</pre></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">04</span><h2>Experiencia</h2></div>
-
-    <h3>Entrada 1 — EasyTheraNotes</h3>
-    <dl class="exp-meta">
-      <dt>Cargo</dt><dd>Founder &amp; Full-Stack Developer</dd>
-      <dt>Empresa</dt><dd>EasyTheraNotes</dd>
-      <dt>Fechas</dt><dd><span class="ph">[mes/año de inicio]</span> – Present</dd>
-      <dt>Ubicación</dt><dd>Miami, Florida (Remote)</dd>
-    </dl>
-    <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Descripción</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>HIPAA-compliant SaaS platform for AI-powered clinical documentation, built and operated end-to-end as a solo developer.
-
-• Architected and shipped the full product: React + TypeScript frontend, Node.js/Express backend, AWS infrastructure (Cognito, DynamoDB, S3, SES, Amplify, EC2).
-• Built an AI documentation pipeline (OpenAI Whisper + GPT-4o) that turns live audio, recordings, or PDFs into structured SOAP notes across 5 clinical specialties.
-• Implemented telehealth video sessions with AWS Chime SDK, including a no-login patient waiting room and in-session note-taking.
-• Developed EasySign: a DocuSign-style e-signature module with drag-and-drop fields, multi-signer flows, SMS/email delivery, and full audit trail.
-• Integrated Stripe subscriptions with trials, referral credits, and a customer portal; built admin analytics for MRR, churn, usage, and per-user AI costs.
-• Automated multi-step workflows with n8n and integrated QuickBooks (OAuth).</pre></div>
-    </div>
-
-    <h3>Entrada 2 — Freelance</h3>
-    <dl class="exp-meta">
-      <dt>Cargo</dt><dd>Freelance Web Developer</dd>
-      <dt>Empresa</dt><dd>Self-employed</dd>
-      <dt>Fechas</dt><dd><span class="ph">[año de inicio]</span> – Present</dd>
-    </dl>
-    <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Descripción</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Design, development, and deployment of websites and internal tools for small businesses in South Florida.
-
-• Corporate websites for construction and remodeling businesses (design, development, SEO basics, and hosting).
-• Internal business tools: learning management system (LMS), employee time-clock system, and IT support tooling for a private company.
-• Self-hosted AI services: deployed an open-source text-to-speech studio (Kokoro-82M) with Docker, Traefik, FastAPI, and automatic HTTPS.
-• Full ownership of each project: requirements, development, deployment (VPS, Docker, CI/CD), and maintenance.</pre></div>
-    </div>
-
-    <div class="tipbox"><b>Empleos anteriores:</b> si tienes trabajos previos (aunque no sean de software), inclúyelos con 1–2 líneas. Un perfil sin historial parece incompleto; responsabilidad, atención al cliente o logística cuentan como experiencia real.</div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="sec-num">05</span><h2>Proyectos</h2></div>
-    <p class="sec-sub">Perfil → Add section → Recommended → <em>Add projects</em>. Además, fija los 2 mejores en <strong>Featured</strong> con capturas (datos demo, nunca datos reales de pacientes).</p>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Experiencia</h2></div>
+    <div class="actual"><b>Actual:</b> ETN figura como "Profesional independiente" y los dos puestos de coordinador de redes están vacíos — justo la prueba de que conoces el sector al que vendes.</div>
 
     <div class="copyblock rec">
-      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ Featured</span> · EasyTheraNotes — easytheranotes.com</span><button class="copy">Copiar</button></div>
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★</span> Founder &amp; CEO · EasyTheraNotes · Sept 2025 – Present</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Building the AI documentation layer for behavioral health practices — a HIPAA-compliant platform that turns a recorded session into a complete SOAP note in minutes.
+
+• Product: designed and shipped AI note generation across 5 clinical specialties, including PSR group notes that produce individual documentation for every participant from a single session, and auto-generated Prior Authorizations for Florida Medicaid MCOs.
+• Engineering: architected and built the entire platform solo — React + TypeScript frontend, Node.js/Express backend, AWS (Cognito, DynamoDB, S3, Chime for telehealth, SES), OpenAI Whisper + GPT-4o pipeline, Stripe billing, n8n automation.
+• Go-to-market: own the full funnel — positioning, pricing ($45/mo all-inclusive vs. $69–99 for incumbents), Instagram and LinkedIn content, direct outreach to Spanish-speaking practices across South Florida.
+• Compliance: built e-signature audit trails, BAAs, and access controls to meet HIPAA requirements from day one rather than retrofitting them.
+
+[Añade 1–2 métricas reales: prácticas activas, notas generadas, horas ahorradas/mes. Una cifra concreta vale más que todo lo anterior.]</pre></div>
+    </div>
+    <div class="tipbox"><b>Importante:</b> cambia "Profesional independiente" y vincula el puesto a la <b>página de empresa de EasyTheraNotes</b> — el logo aparece en tu perfil y la página gana seguidores.</div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Social Media Coordinator · Multilingual Psychotherapy Centers (ajusta y repite en Legacy)</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Lead digital presence for a bilingual behavioral health practice serving Spanish-speaking clients across South Florida.
+
+• Run content strategy and publishing across Instagram, Facebook and Google Business Profile — bilingual copy written for both clinicians and prospective clients.
+• Manage patient-acquisition campaigns and referral-source outreach; coordinate with clinical staff to keep marketing claims accurate and compliant.
+• Handle reputation management and review response, and produce recruiting content for open clinical roles.
+• This role is where I learned the operational reality of a behavioral health practice — intake bottlenecks, documentation burden, prior-auth denials — which directly shaped what I built at EasyTheraNotes.
+
+[Añade métricas: crecimiento de seguidores %, leads generados, reseñas conseguidas.]</pre></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>Destacados + Proyectos</h2></div>
+    <div class="actual"><b>Actual:</b> ninguna de las dos secciones existe.</div>
+    <p class="sec-sub"><strong>Destacados (Featured)</strong> es lo primero que ve el visitante; <strong>Proyectos</strong> documenta lo que has construido (tu pedido original). Capturas siempre con datos demo, nunca de pacientes.</p>
+
+    <h3>Destacados — en este orden</h3>
+    <ul class="clean">
+      <li><strong>Enlace → easytheranotes.com</strong> · título: "EasyTheraNotes — AI SOAP notes in minutes. Free 7-day trial."</li>
+      <li><strong>Vídeo demo de 60–90 s</strong> grabando una sesión y generando la nota. Es lo que más convierte: enseñar el producto funcionando.</li>
+      <li><strong>Tu post</strong> "Three words that don't belong in your clinical notes" — republicado desde tu perfil personal.</li>
+      <li><strong>Tu post</strong> del framework "4-sentence SOAP" — autoridad clínica, no publicidad.</li>
+      <li><strong>Enlace</strong> a la comparativa de precios vs. SimplePractice / TherapyNotes.</li>
+    </ul>
+
+    <h3>Proyectos — sección "Projects"</h3>
+    <div class="copyblock rec">
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★</span> EasyTheraNotes — easytheranotes.com</span><button class="copy">Copiar</button></div>
       <div class="cb-body"><pre>HIPAA-compliant SaaS for mental health professionals: AI-generated SOAP notes (Whisper + GPT-4o), telehealth (AWS Chime), e-signatures, scheduling, income tracking, and Stripe billing. Solo-built: React, TypeScript, Node.js, AWS (Cognito, DynamoDB, S3, SES), n8n, QuickBooks API.</pre></div>
     </div>
-    <div class="copyblock rec">
-      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ Featured</span> · Voiceover Studio — TTS self-hosted</span><button class="copy">Copiar</button></div>
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Voiceover Studio — TTS self-hosted</span><button class="copy">Copiar</button></div>
       <div class="cb-body"><pre>Self-hosted text-to-speech studio built on the open-source Kokoro-82M model. Dockerized deployment with Traefik reverse proxy, automatic HTTPS (Let's Encrypt), FastAPI backend, and an OpenAI-compatible speech API. Runs on CPU-only VPS hardware.</pre></div>
     </div>
     <div class="copyblock">
@@ -327,82 +372,120 @@ Abierto a oportunidades full-stack y proyectos freelance.
       <div class="cb-body"><pre>Clinical documentation tools for ABA therapy providers (RBT session notes), following the EasyTheraNotes architecture: React + TypeScript frontend, Node.js backend, AI-assisted note generation.</pre></div>
     </div>
     <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Suite de herramientas internas (MPCI)</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Internal web tools for a private company: corporate website, learning management system (LMS), employee time-clock, and IT support tooling.</pre></div>
+      <div class="cb-bar"><span class="cb-label">Herramientas internas (MPCI)</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Internal web tools for a behavioral health company: corporate website, learning management system (LMS), employee time-clock, and IT support tooling.</pre></div>
     </div>
     <div class="copyblock">
       <div class="cb-bar"><span class="cb-label">Webs de clientes</span><button class="copy">Copiar</button></div>
       <div class="cb-body"><pre>Corporate websites for South Florida construction businesses (JE Design &amp; Remodeling, drywall contractor): design, development, deployment, and maintenance.</pre></div>
     </div>
-    <div class="tipbox"><b>Tip:</b> si un proyecto de cliente tiene dominio público, enlaza el dominio, no el repo. Los proyectos privados se describen sin enlace.</div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">06</span><h2>Aptitudes (skills)</h2></div>
-    <p class="sec-sub">LinkedIn permite 50 y el orden importa: las 3 primeras se muestran arriba del todo. Pide validaciones (endorsements) para el Top 3 — con 0 validaciones pesan menos en búsquedas.</p>
-    <h3>Top 3 — fijadas</h3>
+    <div class="sec-head"><span class="sec-num">07</span><h2>Aptitudes</h2></div>
+    <div class="actual"><b>Actual:</b> 15 aptitudes sin validaciones; las fijadas (SaaS, Desarrollo de software) no son por las que quieres aparecer.</div>
+    <h3>Top 3 — fijadas (las ve todo el mundo)</h3>
     <div class="chips" style="margin-bottom:18px">
-      <span class="chip top">React.js</span><span class="chip top">Node.js</span><span class="chip top">Amazon Web Services (AWS)</span>
+      <span class="chip top">Health Information Technology (HIT)</span>
+      <span class="chip top">Software as a Service (SaaS)</span>
+      <span class="chip top">Artificial Intelligence (AI)</span>
     </div>
     <h3>Resto, por prioridad</h3>
     <div class="chips">
-      <span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Express.js</span>
-      <span class="chip">Amazon DynamoDB</span><span class="chip">AWS Lambda</span><span class="chip">Amazon Cognito</span>
-      <span class="chip">Amazon S3</span><span class="chip">Stripe API</span><span class="chip">OpenAI API</span>
-      <span class="chip">REST APIs</span><span class="chip">Docker</span><span class="chip">CI/CD</span>
-      <span class="chip">Git · GitHub</span><span class="chip">Full-Stack Development</span><span class="chip">SaaS</span>
-      <span class="chip">HIPAA Compliance</span><span class="chip">Payment Integration</span><span class="chip">Webhooks</span>
-      <span class="chip">n8n</span><span class="chip">Prompt Engineering</span><span class="chip">AI Integration</span>
-      <span class="chip">Speech Recognition</span><span class="chip">Linux Server Administration</span><span class="chip">Nginx / Traefik</span>
-      <span class="chip">PM2</span><span class="chip">HTML5</span><span class="chip">CSS</span>
-      <span class="chip">Responsive Web Design</span><span class="chip">SQL</span><span class="chip">NoSQL</span>
-      <span class="chip">API Development</span><span class="chip">OAuth</span><span class="chip">Software Architecture</span>
-      <span class="chip">Web Security</span><span class="chip">Telehealth Technology</span><span class="chip">QuickBooks Integration</span>
-      <span class="chip">Agile Development</span><span class="chip">Technical Documentation</span>
+      <span class="chip">Electronic Health Records (EHR)</span><span class="chip">HIPAA Compliance</span>
+      <span class="chip">Clinical Documentation</span><span class="chip">Behavioral Health</span>
+      <span class="chip">Product Management</span><span class="chip">Amazon Web Services (AWS)</span>
+      <span class="chip">React.js</span><span class="chip">Node.js</span><span class="chip">TypeScript</span>
+      <span class="chip">n8n</span><span class="chip">Marketing Automation</span><span class="chip">Go-to-Market Strategy</span>
+      <span class="chip">B2B SaaS</span><span class="chip">Digital Marketing</span><span class="chip">Stripe API</span>
+      <span class="chip">OpenAI API</span><span class="chip">Docker</span><span class="chip">Entrepreneurship</span>
+    </div>
+    <div class="tipbox"><b>Después:</b> pide validaciones a 10 contactos para las 3 fijadas. Una aptitud con 0 validaciones pesa lo mismo que no tenerla.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">08</span><h2>Plan de 30 días</h2></div>
+    <div class="cards">
+      <div class="card">
+        <h3>Semana 1 — Cimientos</h3>
+        <ul>
+          <li>Quitar el badge público "en busca de empleo"</li>
+          <li>URL → <code>/in/raullao</code> o <code>/in/raullaoetn</code></li>
+          <li>Perfil principal en inglés + versión en español</li>
+          <li>Publicar titular nuevo y "Acerca de"</li>
+          <li>Banner de ETN (1584×396) con claim y URL</li>
+          <li>Vincular ETN a su página de empresa</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Semana 2 — Prueba social</h3>
+        <ul>
+          <li>Rellenar los 2 puestos de coordinador con métricas</li>
+          <li>Reordenar aptitudes y fijar las 3 clave</li>
+          <li>Pedir 5 recomendaciones: 1 supervisor de cada centro, 2 usuarios de ETN, 1 compañero de MBA</li>
+          <li>Montar Destacados (5 elementos) y Proyectos</li>
+          <li>Pedir validaciones a 10 contactos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Semana 3 — Red</h3>
+        <ul>
+          <li>15–20 solicitudes/día, solo del nicho, nota de 2 líneas sin pitch</li>
+          <li>Seguir hashtags: #privatepractice #clinicaldocumentation #LCSW #LMHC #behavioralhealth</li>
+          <li>Comentar con aporte en 5 posts de terapeutas al día</li>
+          <li>Unirte a 5 grupos de práctica privada</li>
+          <li>Meta: de 21 a 150+ contactos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Semana 4 — Contenido</h3>
+        <ul>
+          <li>3 publicaciones/semana desde tu perfil personal</li>
+          <li>Rotación: tip clínico útil · aprendizaje de founder · dato del sector</li>
+          <li>Cero reposts de terceros durante 30 días</li>
+          <li>Enlaces en el primer comentario, no en el post</li>
+          <li>Responder cada comentario en menos de 2 horas</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">07</span><h2>Otras secciones</h2></div>
-    <ul class="clean">
-      <li><strong>Educación:</strong> completa lo que tengas (<span class="ph">[institución, título, años]</span>). Si eres autodidacta no pasa nada — el portafolio pesa más; pon aquí cursos relevantes.</li>
-      <li><strong>Licencias y certificaciones (opcional, suma):</strong> <em>AWS Certified Cloud Practitioner</em>, <em>freeCodeCamp Full Stack</em> o <em>Meta Front-End Developer</em> (Coursera). Con una o dos basta.</li>
-      <li><strong>Idiomas:</strong> Español (nativo) · Inglés (competencia profesional).</li>
-      <li><strong>Recomendaciones:</strong> pide 1–2 a clientes reales (JE Design, MPCI…). "Construyó nuestro sistema y funciona" vale oro. Ofrece escribirles un borrador para facilitarlo.</li>
-      <li><strong>Contacto:</strong> email + easytheranotes.com.</li>
-    </ul>
+    <div class="sec-head"><span class="sec-num">09</span><h2>Lo que ya funciona — no lo toques</h2></div>
+    <div class="card win">
+      <ul>
+        <li><b>Tu ángulo de credibilidad es único:</b> trabajar dentro de dos centros de salud conductual mientras construyes software para ese sector es una historia que ningún competidor puede copiar. Ponla en el primer párrafo del "Acerca de".</li>
+        <li><b>La calidad de tu contenido es alta</b> — el problema no es qué escribes, es desde dónde (página de empresa) y para quién.</li>
+        <li><b>El posicionamiento de precio se entiende en una frase:</b> $45 todo incluido vs $69–99 con add-ons.</li>
+        <li><b>La descripción del MBA está bien escrita</b> — usa ese mismo registro en el resto del perfil.</li>
+      </ul>
+    </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">08</span><h2>Actividad</h2></div>
-    <p class="sec-sub">El perfil estático es la mitad; LinkedIn muestra a quien publica.</p>
-    <ul class="clean">
-      <li><strong>1 post de presentación</strong> al terminar los cambios: "Llevo X tiempo construyendo EasyTheraNotes, una plataforma HIPAA con IA para terapeutas…" con 2–3 capturas. Los posts de "esto construí" funcionan muy bien.</li>
-      <li><strong>1–2 posts al mes</strong> sobre algo que construiste o un problema técnico resuelto ("cómo monté telehealth con Chime SDK", "lo que aprendí integrando Stripe"). Sirven también como marketing indirecto de ETN.</li>
-      <li><strong>Comenta</strong> en posts de tech de Miami, salud mental e IA — da más visibilidad que solo publicar.</li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="sec-num">09</span><h2>Checklist de implementación</h2></div>
+    <div class="sec-head"><span class="sec-num">10</span><h2>Checklist</h2></div>
     <div class="checklist">
-      <label><input type="checkbox"><span>Cambiar URL personalizada</span></label>
-      <label><input type="checkbox"><span>Subir foto y banner nuevos</span></label>
-      <label><input type="checkbox"><span>Pegar el nuevo titular (opción recomendada)</span></label>
-      <label><input type="checkbox"><span>Pegar "About" en inglés</span></label>
-      <label><input type="checkbox"><span>Crear perfil secundario en español y pegar el "About" en español</span></label>
-      <label><input type="checkbox"><span>Añadir experiencia: EasyTheraNotes + Freelance</span></label>
-      <label><input type="checkbox"><span>Añadir los 5 proyectos en la sección Projects</span></label>
-      <label><input type="checkbox"><span>Configurar Featured con capturas de ETN (datos demo)</span></label>
-      <label><input type="checkbox"><span>Cargar las skills y fijar el Top 3</span></label>
-      <label><input type="checkbox"><span>Añadir idiomas, educación y contacto</span></label>
-      <label><input type="checkbox"><span>Pedir 2 recomendaciones a clientes</span></label>
-      <label><input type="checkbox"><span>Publicar el post de presentación</span></label>
+      <div class="group">Hoy (30 min)</div>
+      <label><input type="checkbox"><span>Quitar badge público "en busca de empleo" (o solo-reclutadores)</span></label>
+      <label><input type="checkbox"><span>Personalizar URL</span></label>
+      <label><input type="checkbox"><span>Pegar titular nuevo (★)</span></label>
+      <label><input type="checkbox"><span>Pegar "Acerca de" en inglés</span></label>
+      <label><input type="checkbox"><span>Crear perfil en español y pegar su "Acerca de"</span></label>
+      <div class="group">Esta semana</div>
+      <label><input type="checkbox"><span>Banner nuevo de ETN + revisar foto</span></label>
+      <label><input type="checkbox"><span>Actualizar experiencia ETN + vincular página de empresa</span></label>
+      <label><input type="checkbox"><span>Rellenar los 2 puestos de coordinador</span></label>
+      <label><input type="checkbox"><span>Montar Destacados (5) y Proyectos (5)</span></label>
+      <label><input type="checkbox"><span>Reordenar aptitudes, fijar Top 3, pedir validaciones</span></label>
+      <div class="group">Este mes</div>
+      <label><input type="checkbox"><span>Pedir 5 recomendaciones</span></label>
+      <label><input type="checkbox"><span>15–20 solicitudes/día del nicho → 150+ contactos</span></label>
+      <label><input type="checkbox"><span>3 posts/semana desde el perfil personal, cero reposts</span></label>
     </div>
   </section>
 
   <footer>
-    Preparado para Raúl Alejandro La O · agosto 2026. Los bloques en inglés van al perfil principal; los de español, al perfil secundario en español de LinkedIn.
+    Basado en la lectura directa del perfil (18/08/2026) + auditoría de la extensión. Los bloques son borradores: revisa las cifras del sector (13,5 h/semana, precios de competidores) antes de publicarlas — provienen de tu propio contenido y los precios cambian.
   </footer>
 </div>
 
