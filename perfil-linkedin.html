@@ -1,0 +1,433 @@
+<title>LinkedIn de Raúl La O</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #F6F7F9;
+    --surface: #FFFFFF;
+    --surface-2: #EEF1F5;
+    --ink: #1A2330;
+    --ink-2: #4A5768;
+    --ink-3: #74808F;
+    --line: #DCE1E8;
+    --accent: #14657E;
+    --accent-ink: #0F556B;
+    --accent-soft: #E3EEF2;
+    --chip-bg: #E9EEF3;
+    --code-bg: #F1F4F7;
+    --good: #2E7D4F;
+    --star: #B07818;
+  }
+  :root:not([data-theme="light"]) { }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12181F;
+      --surface: #1A222C;
+      --surface-2: #202A36;
+      --ink: #E8ECF1;
+      --ink-2: #AEB9C6;
+      --ink-3: #7E8A98;
+      --line: #2C3846;
+      --accent: #5FB6CE;
+      --accent-ink: #7CC6DB;
+      --accent-soft: #1C3540;
+      --chip-bg: #243040;
+      --code-bg: #161D25;
+      --good: #6DC392;
+      --star: #D9A84E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12181F;
+    --surface: #1A222C;
+    --surface-2: #202A36;
+    --ink: #E8ECF1;
+    --ink-2: #AEB9C6;
+    --ink-3: #7E8A98;
+    --line: #2C3846;
+    --accent: #5FB6CE;
+    --accent-ink: #7CC6DB;
+    --accent-soft: #1C3540;
+    --chip-bg: #243040;
+    --code-bg: #161D25;
+    --good: #6DC392;
+    --star: #D9A84E;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Public Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 48px 20px 96px; }
+
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Public Sans", sans-serif; text-wrap: balance; line-height: 1.15; }
+  h1 { font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 700; margin: 10px 0 12px; }
+  h2 { font-size: 1.45rem; font-weight: 700; margin: 0 0 6px; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 8px; }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent-ink); }
+
+  .eyebrow {
+    font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+  .lede { font-size: 1.08rem; color: var(--ink-2); max-width: 60ch; }
+
+  header.hero { padding-bottom: 26px; border-bottom: 1px solid var(--line); margin-bottom: 34px; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .hero-meta span {
+    font-size: .8rem; font-weight: 600; color: var(--ink-2);
+    background: var(--chip-bg); border-radius: 999px; padding: 4px 12px;
+  }
+
+  .strategy { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 26px 0 6px; }
+  .strategy .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 16px 12px;
+  }
+  .strategy .card b { display: block; margin-bottom: 4px; font-size: .95rem; }
+  .strategy .card p { font-size: .87rem; color: var(--ink-2); margin: 0; }
+
+  section { margin: 44px 0; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .sec-num {
+    font-family: "IBM Plex Mono", monospace; font-size: .85rem; font-weight: 500;
+    color: var(--accent-ink); background: var(--accent-soft);
+    border-radius: 6px; padding: 2px 8px; flex: none;
+  }
+  .sec-sub { color: var(--ink-2); margin-top: -2px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  th, td { text-align: left; padding: 10px 14px; border-top: 1px solid var(--line); vertical-align: top; }
+  thead th { border-top: none; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+
+  .copyblock { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 16px; overflow: hidden; }
+  .copyblock.rec { border-color: var(--accent); }
+  .cb-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 8px 12px 8px 14px; background: var(--surface-2); border-bottom: 1px solid var(--line);
+  }
+  .cb-label { font-size: .78rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); }
+  .cb-label .rec-tag { color: var(--star); }
+  .cb-body { padding: 14px 16px; }
+  .cb-body pre {
+    margin: 0; white-space: pre-wrap; word-break: break-word;
+    font-family: "Public Sans", sans-serif; font-size: .93rem; line-height: 1.55; color: var(--ink);
+  }
+  .cb-body pre.mono { font-family: "IBM Plex Mono", monospace; font-size: .85rem; }
+  button.copy {
+    font: 600 .78rem "Public Sans", sans-serif; letter-spacing: .02em;
+    color: var(--accent-ink); background: transparent;
+    border: 1px solid var(--accent); border-radius: 7px; padding: 5px 12px; cursor: pointer; flex: none;
+  }
+  button.copy:hover { background: var(--accent-soft); }
+  button.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button.copy.done { color: var(--good); border-color: var(--good); }
+
+  .field-note { font-size: .84rem; color: var(--ink-3); margin: -8px 0 18px; }
+
+  .exp-meta { display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; font-size: .9rem; margin: 0 0 12px; }
+  .exp-meta dt { color: var(--ink-3); }
+  .exp-meta dd { margin: 0; font-weight: 600; }
+  .ph { color: var(--star); font-weight: 700; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { font-size: .84rem; font-weight: 500; background: var(--chip-bg); border-radius: 999px; padding: 4px 12px; }
+  .chip.top { background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; border: 1px solid var(--accent); }
+
+  .tipbox {
+    border-left: 3px solid var(--accent); background: var(--surface);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: .9rem; color: var(--ink-2); margin: 16px 0;
+  }
+  .tipbox b { color: var(--ink); }
+
+  ul.clean { padding-left: 20px; margin: 0 0 14px; }
+  ul.clean li { margin-bottom: 6px; }
+
+  .checklist { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px; }
+  .checklist label {
+    display: flex; gap: 12px; align-items: flex-start; padding: 9px 12px;
+    border-radius: 8px; cursor: pointer; font-size: .95rem;
+  }
+  .checklist label:hover { background: var(--surface-2); }
+  .checklist input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
+  .checklist input:checked + span { color: var(--ink-3); text-decoration: line-through; }
+
+  footer { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 18px; font-size: .85rem; color: var(--ink-3); }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Guía de mejora · linkedin.com/in/raul-la-o</div>
+    <h1>LinkedIn de Raúl La O</h1>
+    <p class="lede">Propuesta completa para convertir tu perfil en el de un <strong>Full-Stack Developer &amp; SaaS Founder</strong>. Cada bloque tiene un botón <em>Copiar</em> para pegarlo directo en LinkedIn. Los marcadores <span class="ph">[…]</span> son datos que solo tú tienes (fechas, estudios).</p>
+    <div class="hero-meta">
+      <span>Miami / South Florida</span>
+      <span>React · Node · AWS · IA</span>
+      <span>~45 min de implementación</span>
+    </div>
+    <div class="strategy">
+      <div class="card">
+        <b>Perfil principal en inglés</b>
+        <p>Los reclutadores en USA buscan en inglés. Crea además el perfil secundario en español (Add profile in another language).</p>
+      </div>
+      <div class="card">
+        <b>Identidad clara</b>
+        <p>No "busco cualquier trabajo": construyes productos web completos, de la idea a producción.</p>
+      </div>
+      <div class="card">
+        <b>EasyTheraNotes al frente</b>
+        <p>Un SaaS HIPAA real, en producción, hecho por una persona, vale más que cualquier certificado. Debe dominar el perfil.</p>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>Básicos del perfil</h2></div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Elemento</th><th>Qué hacer</th></tr></thead>
+        <tbody>
+          <tr><td>URL personalizada</td><td>Cambiar <code>raul-la-o-814b042a2</code> → <code>raul-la-o</code> o <code>raul-lao-dev</code> (Perfil → Editar URL pública).</td></tr>
+          <tr><td>Foto</td><td>Fondo neutro, buena luz, de hombros hacia arriba, sin filtros. Camisa simple; no hace falta traje.</td></tr>
+          <tr><td>Banner</td><td>Nada genérico: "Full-Stack Developer · React · Node · AWS · AI" con una captura sutil de EasyTheraNotes de fondo. En Canva, 1584×396 px, 10 minutos.</td></tr>
+          <tr><td>Ubicación</td><td>Miami, Florida, United States.</td></tr>
+          <tr><td>Sector</td><td>Software Development.</td></tr>
+          <tr><td>Open to work</td><td>Solo si buscas empleo, y visible <em>solo para reclutadores</em> — no debilites la imagen de founder ante clientes.</td></tr>
+          <tr><td>Sitio web</td><td>Añadir <a href="https://easytheranotes.com">easytheranotes.com</a> en la info de contacto.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Titular (headline)</h2></div>
+    <p class="sec-sub">Es el campo que más pesa en las búsquedas. Máximo 220 caracteres.</p>
+
+    <div class="copyblock rec">
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ Recomendada</span> · Founder + Developer</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Full-Stack Developer | Founder @ EasyTheraNotes — HIPAA-compliant AI platform for mental health professionals | React · TypeScript · Node.js · AWS · OpenAI</pre></div>
+    </div>
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Opción B · Orientada a empleo</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Full-Stack Developer | React · TypeScript · Node.js · AWS (Cognito, DynamoDB, S3) · Stripe · OpenAI | Building production SaaS end-to-end</pre></div>
+    </div>
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Opción C · Bilingüe</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Full-Stack Developer &amp; SaaS Founder | React · Node · AWS · AI | Construyo productos web de punta a punta — from idea to production</pre></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Acerca de (About)</h2></div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Inglés · perfil principal</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>I build complete web products — from the first line of code to production, payments, and real users.
+
+I'm the founder and sole developer of EasyTheraNotes (easytheranotes.com), a HIPAA-compliant SaaS platform that helps mental health professionals generate clinical documentation with AI. I designed and built the entire product:
+
+• Frontend in React + TypeScript, backend in Node.js/Express on AWS
+• AI pipeline with OpenAI GPT-4o and Whisper for audio-to-SOAP-note generation
+• Telehealth video sessions (AWS Chime SDK), e-signatures, scheduling, and income tracking
+• Stripe subscriptions, referral system, and a full admin panel with usage, revenue, and AI-cost analytics
+• Infrastructure on AWS: Cognito, DynamoDB, S3, SES, SNS, Amplify, EC2
+
+Beyond my own product, I've delivered web projects for real businesses: corporate sites, an LMS, a time-clock system, internal tools, and self-hosted AI services (text-to-speech with Docker, Traefik, and FastAPI).
+
+What I bring: I don't just write code — I ship. I handle architecture, security, integrations (Stripe, QuickBooks, OpenAI, n8n), deployment, and everything in between.
+
+Open to full-stack opportunities and freelance projects.
+📩 laoraulalejandrocipre@gmail.com</pre></div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Español · perfil secundario</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Construyo productos web completos: desde la primera línea de código hasta producción, pagos y usuarios reales.
+
+Soy fundador y único desarrollador de EasyTheraNotes (easytheranotes.com), una plataforma SaaS HIPAA-compliant que ayuda a profesionales de salud mental a generar documentación clínica con IA. Diseñé y construí todo el producto:
+
+• Frontend en React + TypeScript, backend en Node.js/Express sobre AWS
+• Pipeline de IA con OpenAI GPT-4o y Whisper: de audio a nota clínica SOAP
+• Telehealth por video (AWS Chime SDK), firmas electrónicas, calendario y control de ingresos
+• Suscripciones con Stripe, sistema de referidos y panel de administración completo con analítica de uso, ingresos y costos de IA
+• Infraestructura en AWS: Cognito, DynamoDB, S3, SES, SNS, Amplify, EC2
+
+Además he entregado proyectos web para negocios reales: sitios corporativos, un LMS, sistema de control de horarios, herramientas internas y servicios de IA self-hosted (texto-a-voz con Docker, Traefik y FastAPI).
+
+Lo que aporto: no solo escribo código — entrego producto. Manejo arquitectura, seguridad, integraciones (Stripe, QuickBooks, OpenAI, n8n) y despliegue.
+
+Abierto a oportunidades full-stack y proyectos freelance.
+📩 laoraulalejandrocipre@gmail.com</pre></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Experiencia</h2></div>
+
+    <h3>Entrada 1 — EasyTheraNotes</h3>
+    <dl class="exp-meta">
+      <dt>Cargo</dt><dd>Founder &amp; Full-Stack Developer</dd>
+      <dt>Empresa</dt><dd>EasyTheraNotes</dd>
+      <dt>Fechas</dt><dd><span class="ph">[mes/año de inicio]</span> – Present</dd>
+      <dt>Ubicación</dt><dd>Miami, Florida (Remote)</dd>
+    </dl>
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Descripción</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>HIPAA-compliant SaaS platform for AI-powered clinical documentation, built and operated end-to-end as a solo developer.
+
+• Architected and shipped the full product: React + TypeScript frontend, Node.js/Express backend, AWS infrastructure (Cognito, DynamoDB, S3, SES, Amplify, EC2).
+• Built an AI documentation pipeline (OpenAI Whisper + GPT-4o) that turns live audio, recordings, or PDFs into structured SOAP notes across 5 clinical specialties.
+• Implemented telehealth video sessions with AWS Chime SDK, including a no-login patient waiting room and in-session note-taking.
+• Developed EasySign: a DocuSign-style e-signature module with drag-and-drop fields, multi-signer flows, SMS/email delivery, and full audit trail.
+• Integrated Stripe subscriptions with trials, referral credits, and a customer portal; built admin analytics for MRR, churn, usage, and per-user AI costs.
+• Automated multi-step workflows with n8n and integrated QuickBooks (OAuth).</pre></div>
+    </div>
+
+    <h3>Entrada 2 — Freelance</h3>
+    <dl class="exp-meta">
+      <dt>Cargo</dt><dd>Freelance Web Developer</dd>
+      <dt>Empresa</dt><dd>Self-employed</dd>
+      <dt>Fechas</dt><dd><span class="ph">[año de inicio]</span> – Present</dd>
+    </dl>
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Descripción</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Design, development, and deployment of websites and internal tools for small businesses in South Florida.
+
+• Corporate websites for construction and remodeling businesses (design, development, SEO basics, and hosting).
+• Internal business tools: learning management system (LMS), employee time-clock system, and IT support tooling for a private company.
+• Self-hosted AI services: deployed an open-source text-to-speech studio (Kokoro-82M) with Docker, Traefik, FastAPI, and automatic HTTPS.
+• Full ownership of each project: requirements, development, deployment (VPS, Docker, CI/CD), and maintenance.</pre></div>
+    </div>
+
+    <div class="tipbox"><b>Empleos anteriores:</b> si tienes trabajos previos (aunque no sean de software), inclúyelos con 1–2 líneas. Un perfil sin historial parece incompleto; responsabilidad, atención al cliente o logística cuentan como experiencia real.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Proyectos</h2></div>
+    <p class="sec-sub">Perfil → Add section → Recommended → <em>Add projects</em>. Además, fija los 2 mejores en <strong>Featured</strong> con capturas (datos demo, nunca datos reales de pacientes).</p>
+
+    <div class="copyblock rec">
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ Featured</span> · EasyTheraNotes — easytheranotes.com</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>HIPAA-compliant SaaS for mental health professionals: AI-generated SOAP notes (Whisper + GPT-4o), telehealth (AWS Chime), e-signatures, scheduling, income tracking, and Stripe billing. Solo-built: React, TypeScript, Node.js, AWS (Cognito, DynamoDB, S3, SES), n8n, QuickBooks API.</pre></div>
+    </div>
+    <div class="copyblock rec">
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ Featured</span> · Voiceover Studio — TTS self-hosted</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Self-hosted text-to-speech studio built on the open-source Kokoro-82M model. Dockerized deployment with Traefik reverse proxy, automatic HTTPS (Let's Encrypt), FastAPI backend, and an OpenAI-compatible speech API. Runs on CPU-only VPS hardware.</pre></div>
+    </div>
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">EasyABANotes / RBT Notes</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Clinical documentation tools for ABA therapy providers (RBT session notes), following the EasyTheraNotes architecture: React + TypeScript frontend, Node.js backend, AI-assisted note generation.</pre></div>
+    </div>
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Suite de herramientas internas (MPCI)</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Internal web tools for a private company: corporate website, learning management system (LMS), employee time-clock, and IT support tooling.</pre></div>
+    </div>
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">Webs de clientes</span><button class="copy">Copiar</button></div>
+      <div class="cb-body"><pre>Corporate websites for South Florida construction businesses (JE Design &amp; Remodeling, drywall contractor): design, development, deployment, and maintenance.</pre></div>
+    </div>
+    <div class="tipbox"><b>Tip:</b> si un proyecto de cliente tiene dominio público, enlaza el dominio, no el repo. Los proyectos privados se describen sin enlace.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>Aptitudes (skills)</h2></div>
+    <p class="sec-sub">LinkedIn permite 50 y el orden importa: las 3 primeras se muestran arriba del todo. Pide validaciones (endorsements) para el Top 3 — con 0 validaciones pesan menos en búsquedas.</p>
+    <h3>Top 3 — fijadas</h3>
+    <div class="chips" style="margin-bottom:18px">
+      <span class="chip top">React.js</span><span class="chip top">Node.js</span><span class="chip top">Amazon Web Services (AWS)</span>
+    </div>
+    <h3>Resto, por prioridad</h3>
+    <div class="chips">
+      <span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Express.js</span>
+      <span class="chip">Amazon DynamoDB</span><span class="chip">AWS Lambda</span><span class="chip">Amazon Cognito</span>
+      <span class="chip">Amazon S3</span><span class="chip">Stripe API</span><span class="chip">OpenAI API</span>
+      <span class="chip">REST APIs</span><span class="chip">Docker</span><span class="chip">CI/CD</span>
+      <span class="chip">Git · GitHub</span><span class="chip">Full-Stack Development</span><span class="chip">SaaS</span>
+      <span class="chip">HIPAA Compliance</span><span class="chip">Payment Integration</span><span class="chip">Webhooks</span>
+      <span class="chip">n8n</span><span class="chip">Prompt Engineering</span><span class="chip">AI Integration</span>
+      <span class="chip">Speech Recognition</span><span class="chip">Linux Server Administration</span><span class="chip">Nginx / Traefik</span>
+      <span class="chip">PM2</span><span class="chip">HTML5</span><span class="chip">CSS</span>
+      <span class="chip">Responsive Web Design</span><span class="chip">SQL</span><span class="chip">NoSQL</span>
+      <span class="chip">API Development</span><span class="chip">OAuth</span><span class="chip">Software Architecture</span>
+      <span class="chip">Web Security</span><span class="chip">Telehealth Technology</span><span class="chip">QuickBooks Integration</span>
+      <span class="chip">Agile Development</span><span class="chip">Technical Documentation</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">07</span><h2>Otras secciones</h2></div>
+    <ul class="clean">
+      <li><strong>Educación:</strong> completa lo que tengas (<span class="ph">[institución, título, años]</span>). Si eres autodidacta no pasa nada — el portafolio pesa más; pon aquí cursos relevantes.</li>
+      <li><strong>Licencias y certificaciones (opcional, suma):</strong> <em>AWS Certified Cloud Practitioner</em>, <em>freeCodeCamp Full Stack</em> o <em>Meta Front-End Developer</em> (Coursera). Con una o dos basta.</li>
+      <li><strong>Idiomas:</strong> Español (nativo) · Inglés (competencia profesional).</li>
+      <li><strong>Recomendaciones:</strong> pide 1–2 a clientes reales (JE Design, MPCI…). "Construyó nuestro sistema y funciona" vale oro. Ofrece escribirles un borrador para facilitarlo.</li>
+      <li><strong>Contacto:</strong> email + easytheranotes.com.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">08</span><h2>Actividad</h2></div>
+    <p class="sec-sub">El perfil estático es la mitad; LinkedIn muestra a quien publica.</p>
+    <ul class="clean">
+      <li><strong>1 post de presentación</strong> al terminar los cambios: "Llevo X tiempo construyendo EasyTheraNotes, una plataforma HIPAA con IA para terapeutas…" con 2–3 capturas. Los posts de "esto construí" funcionan muy bien.</li>
+      <li><strong>1–2 posts al mes</strong> sobre algo que construiste o un problema técnico resuelto ("cómo monté telehealth con Chime SDK", "lo que aprendí integrando Stripe"). Sirven también como marketing indirecto de ETN.</li>
+      <li><strong>Comenta</strong> en posts de tech de Miami, salud mental e IA — da más visibilidad que solo publicar.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">09</span><h2>Checklist de implementación</h2></div>
+    <div class="checklist">
+      <label><input type="checkbox"><span>Cambiar URL personalizada</span></label>
+      <label><input type="checkbox"><span>Subir foto y banner nuevos</span></label>
+      <label><input type="checkbox"><span>Pegar el nuevo titular (opción recomendada)</span></label>
+      <label><input type="checkbox"><span>Pegar "About" en inglés</span></label>
+      <label><input type="checkbox"><span>Crear perfil secundario en español y pegar el "About" en español</span></label>
+      <label><input type="checkbox"><span>Añadir experiencia: EasyTheraNotes + Freelance</span></label>
+      <label><input type="checkbox"><span>Añadir los 5 proyectos en la sección Projects</span></label>
+      <label><input type="checkbox"><span>Configurar Featured con capturas de ETN (datos demo)</span></label>
+      <label><input type="checkbox"><span>Cargar las skills y fijar el Top 3</span></label>
+      <label><input type="checkbox"><span>Añadir idiomas, educación y contacto</span></label>
+      <label><input type="checkbox"><span>Pedir 2 recomendaciones a clientes</span></label>
+      <label><input type="checkbox"><span>Publicar el post de presentación</span></label>
+    </div>
+  </section>
+
+  <footer>
+    Preparado para Raúl Alejandro La O · agosto 2026. Los bloques en inglés van al perfil principal; los de español, al perfil secundario en español de LinkedIn.
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('button.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = btn.closest('.copyblock').querySelector('.cb-body pre');
+      var text = pre.innerText;
+      function ok() {
+        btn.textContent = 'Copiado ✓';
+        btn.classList.add('done');
+        setTimeout(function () { btn.textContent = 'Copiar'; btn.classList.remove('done'); }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok, function () { fallback(); });
+      } else { fallback(); }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); ok(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
