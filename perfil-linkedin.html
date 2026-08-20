@@ -148,6 +148,8 @@
   button.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   button.copy.done { color: var(--good); border-color: var(--good); }
   .chars { color: var(--ink-3); font-size: .78rem; font-family: "IBM Plex Mono", monospace; margin: -8px 0 18px; }
+  .pitch { font-size: .86rem; color: var(--ink-2); border-bottom: 1px dashed var(--line); padding-bottom: 10px; margin-bottom: 12px; }
+  .pitch b { color: var(--accent-ink); }
   .ph { color: var(--star); font-weight: 700; }
 
   .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -278,7 +280,7 @@ It's an AI-powered, HIPAA-compliant platform that turns a recorded session into 
 
 All of it for $45/month. No add-ons, no per-specialty charges. SimplePractice charges $79–99. TherapyNotes charges $69.
 
-Why I'm the one building this: I don't come to behavioral health from the outside. I've spent the last two years running social media and marketing for two mental health organizations in Florida — Multilingual Psychotherapy Centers and Legacy Behavioral Health Center. I've watched clinicians chart at 10 PM. I've seen what a denied prior auth does to a caseload. The product is built around problems I saw first, not problems I read about.
+Why I'm the one building this: I don't come to behavioral health from the outside. I've spent the last two years running social media and marketing for two mental health organizations in Florida — Multilingual Psychotherapy Centers and Legacy Behavioral Health Center. I've watched clinicians chart at 10 PM. I've seen what a denied prior auth does to a caseload. The product is built around problems I saw first, not problems I read about. Along the way I also built both organizations' digital infrastructure: trilingual public websites (English / Spanish / Haitian Creole) with AI chat assistants, a compliance-training platform, a staff time clock, and an IT helpdesk.
 
 On the technical side, I designed and built the entire platform myself: React + TypeScript frontend, Node.js backend, AWS infrastructure (Cognito, DynamoDB, Chime, Lambda), OpenAI for the AI pipeline, n8n for automation — and I'm finishing an MBA in Digital Marketing at NUC University.
 
@@ -304,7 +306,7 @@ Es una plataforma con IA, HIPAA-compliant, que convierte una sesión grabada en 
 
 Todo por $45 al mes. Sin add-ons ni cargos por especialidad. SimplePractice cobra $79–99. TherapyNotes cobra $69.
 
-Por qué lo construyo yo: no llego a la salud conductual desde afuera. Llevo dos años llevando marketing y redes para dos organizaciones de salud mental en Florida — Multilingual Psychotherapy Centers y Legacy Behavioral Health Center. He visto a clínicos documentando a las 10 de la noche y lo que una autorización denegada le hace a un caseload. El producto resuelve problemas que vi primero, no que leí.
+Por qué lo construyo yo: no llego a la salud conductual desde afuera. Llevo dos años llevando marketing y redes para dos organizaciones de salud mental en Florida — Multilingual Psychotherapy Centers y Legacy Behavioral Health Center. He visto a clínicos documentando a las 10 de la noche y lo que una autorización denegada le hace a un caseload. El producto resuelve problemas que vi primero, no que leí. En el camino también construí su infraestructura digital: webs públicas trilingües (inglés / español / creole haitiano) con asistentes de chat con IA, una plataforma de formación en compliance, un reloj de horarios para el personal y un helpdesk de IT.
 
 En lo técnico, diseñé y construí toda la plataforma yo mismo: React + TypeScript, Node.js, AWS (Cognito, DynamoDB, Chime, Lambda), OpenAI para el pipeline de IA y n8n para automatización — y estoy terminando un MBA en Marketing Digital en NUC University.
 
@@ -338,6 +340,7 @@ Prueba gratis de 7 días, sin tarjeta: easytheranotes.com</pre></div>
 • Run content strategy and publishing across Instagram, Facebook and Google Business Profile — bilingual copy written for both clinicians and prospective clients.
 • Manage patient-acquisition campaigns and referral-source outreach; coordinate with clinical staff to keep marketing claims accurate and compliant.
 • Handle reputation management and review response, and produce recruiting content for open clinical roles.
+• Beyond marketing, built the organization's digital infrastructure: a trilingual public website (Next.js — English / Spanish / Haitian Creole) with an AI chat assistant, a compliance-training LMS for 50+ clinical staff, a staff time clock with PTO approval workflows, and an IT helpdesk with asset inventory.
 • This role is where I learned the operational reality of a behavioral health practice — intake bottlenecks, documentation burden, prior-auth denials — which directly shaped what I built at EasyTheraNotes.
 
 [Añade métricas: crecimiento de seguidores %, leads generados, reseñas conseguidas.]</pre></div>
@@ -359,25 +362,102 @@ Prueba gratis de 7 días, sin tarjeta: easytheranotes.com</pre></div>
     </ul>
 
     <h3>Proyectos — sección "Projects"</h3>
+    <div class="tipbox"><b>Basado en el código real de tus 12 repos.</b> Cada ficha trae: 💬 <em>cómo hablarlo</em> (tu frase para conversaciones y entrevistas) y la descripción en inglés lista para pegar en LinkedIn. <b>No cargues los 12</b> — recomendado: los 8 primeros en LinkedIn; el resto guárdalo para conversaciones. Y nota estratégica: las webs de MPCI y Legacy refuerzan tu historia de founder — no las escondas como "trabajos de cliente".</div>
+
     <div class="copyblock rec">
-      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★</span> EasyTheraNotes — easytheranotes.com</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>HIPAA-compliant SaaS for mental health professionals: AI-generated SOAP notes (Whisper + GPT-4o), telehealth (AWS Chime), e-signatures, scheduling, income tracking, and Stripe billing. Solo-built: React, TypeScript, Node.js, AWS (Cognito, DynamoDB, S3, SES), n8n, QuickBooks API.</pre></div>
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ 1</span> EasyTheraNotes — easytheranotes.com</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "Mi producto principal: una plataforma HIPAA que convierte una sesión grabada en una nota clínica completa en minutos. La construí yo solo, de punta a punta, y está en producción con usuarios reales."</div>
+        <pre>HIPAA-compliant SaaS for mental health professionals: AI-generated clinical notes in multiple formats (SOAP, BIRP, DAP, GIRP, intake, discharge) from recorded sessions, auto-generated Prior Authorizations for 7 Florida Medicaid MCOs, telehealth (AWS Chime SDK), e-signatures with audit trail, scheduling, income tracking, and Stripe billing — plus a Chrome extension. Solo-built and live in production: React, TypeScript, Node.js/Express, AWS (Cognito, DynamoDB, S3, SES, Lambda), OpenAI, n8n.</pre>
+      </div>
     </div>
-    <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Voiceover Studio — TTS self-hosted</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Self-hosted text-to-speech studio built on the open-source Kokoro-82M model. Dockerized deployment with Traefik reverse proxy, automatic HTTPS (Let's Encrypt), FastAPI backend, and an OpenAI-compatible speech API. Runs on CPU-only VPS hardware.</pre></div>
+
+    <div class="copyblock rec">
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ 2</span> MPCI — web de la clínica (mpcipbc.com)</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "Reconstruí la web completa de una clínica de salud mental con 3 oficinas: trilingüe — inglés, español y creole haitiano — con un chat de IA que detecta lenguaje de crisis y deriva al 988, y formularios clínicos de referido que llegan por email."</div>
+        <pre>Complete rebuild of the website for Multilingual Psychotherapy Centers, a mental health clinic founded in 1997 with 3 offices in Palm Beach County — replacing a legacy WordPress site. Trilingual (English / Spanish / Haitian Creole), AI chat assistant (Amazon Bedrock) with a crisis-language detector that routes to 988, an 8-section clinical referral form delivered via AWS SES, auto-filled PDF clinical forms, Google Reviews integration, and full Schema.org SEO. Next.js, TypeScript, AWS Amplify.</pre>
+      </div>
     </div>
-    <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">EasyABANotes / RBT Notes</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Clinical documentation tools for ABA therapy providers (RBT session notes), following the EasyTheraNotes architecture: React + TypeScript frontend, Node.js backend, AI-assisted note generation.</pre></div>
+
+    <div class="copyblock rec">
+      <div class="cb-bar"><span class="cb-label"><span class="rec-tag">★ 3</span> Legacy Behavioral Health — web (legacybhc.com)</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "La web de Legacy: misma arquitectura trilingüe, migrada de WordPress/GoDaddy a AWS, ya desplegada. Documenté toda la migración para que el cliente pudiera operarla."</div>
+        <pre>Trilingual website (English / Spanish / Haitian Creole) for Legacy Behavioral Health Center, migrated from a GoDaddy WordPress installation to AWS. AI chat widget (Amazon Bedrock), referral and contact forms with layered anti-spam (honeypot, per-IP rate limiting, reCAPTCHA) delivered via AWS SES, Google Reviews integration, SEO schema, and full 301-redirect mapping from the legacy URLs. Next.js, TypeScript, AWS Amplify.</pre>
+      </div>
     </div>
+
     <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Herramientas internas (MPCI)</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Internal web tools for a behavioral health company: corporate website, learning management system (LMS), employee time-clock, and IT support tooling.</pre></div>
+      <div class="cb-bar"><span class="cb-label">4 · MPCI LMS — plataforma de formación</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "La clínica pagaba $169/mes por TalentLMS para sus cursos de compliance. Les construí su propia plataforma: cursos, exámenes, certificados en PDF y recordatorios automáticos de renovación para 50+ empleados clínicos."</div>
+        <pre>Internal learning-management platform for 50+ clinical staff, built to replace a paid TalentLMS subscription. Course player with per-lesson progress tracking, timed tests with scoring, a PDF certificate engine with custom templates, automated renewal reminders (AWS Lambda + SES), compliance reporting with CSV export, and a Word-document question-bank importer for migrating existing courses. Next.js, TypeScript, PostgreSQL (Drizzle ORM), AWS S3/CloudFront.</pre>
+      </div>
     </div>
+
     <div class="copyblock">
-      <div class="cb-bar"><span class="cb-label">Webs de clientes</span><button class="copy">Copiar</button></div>
-      <div class="cb-body"><pre>Corporate websites for South Florida construction businesses (JE Design &amp; Remodeling, drywall contractor): design, development, deployment, and maintenance.</pre></div>
+      <div class="cb-bar"><span class="cb-label">5 · MPCI Time Clock — horarios y PTO</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "Reemplacé el reloj comercial de fichaje (uAttend) por una app propia: entrada/salida desde el móvil, tarjetas quincenales y un flujo de aprobación de vacaciones en dos niveles — supervisor y luego HR."</div>
+        <pre>Staff timekeeping web app replacing a commercial punch-clock system: mobile-first clock in/out with lunch tracking, bi-weekly time cards with CSV export, and a two-stage PTO approval workflow (supervisor → HR) backed by a balance ledger that reserves pending hours until approval. Timezone-safe punch attribution and a full audit log. Next.js, TypeScript, PostgreSQL, AWS Amplify + SES.</pre>
+      </div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">6 · MPCI IT Helpdesk — tickets e inventario</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "Un sistema de tickets de IT con SLA por prioridad — un ticket urgente exige respuesta en 1 hora — más inventario de equipos con etiquetas automáticas e historial de asignación."</div>
+        <pre>IT helpdesk and asset-inventory system for internal staff: ticket queue with per-priority SLA tracking (response/resolution targets with pre-breach warnings), threaded ticket conversations, magic-link email sign-in, and a hardware/software inventory with auto-generated asset tags, status lifecycle, and assignment history. Next.js, TypeScript, PostgreSQL, AWS SES.</pre>
+      </div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">7 · Traductor de sesiones en tiempo real + ASL</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "Un traductor de voz en vivo para sesiones de terapia bilingües — el audio va directo del navegador a OpenAI por WebRTC, la API key nunca toca el cliente. Y un experimento de reconocimiento de lengua de señas para pacientes sordos."</div>
+        <pre>Real-time speech-to-speech translation tool for bilingual therapy sessions, built on OpenAI's Realtime API. Audio streams directly browser ↔ OpenAI via WebRTC using server-minted ephemeral tokens, so the API key never reaches the client; live side-by-side bilingual transcript and per-session cost metering. Includes an experimental ASL (sign language) recognition pipeline — MediaPipe hand/pose/face tracking with an LSTM classifier and a clinical 60-sign vocabulary — to help Deaf patients communicate in session. Node.js, WebRTC, Docker + Traefik, GitHub Actions CI/CD.</pre>
+      </div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">8 · JE Design &amp; Remodeling — web + CMS propio</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "No es solo una web bonita: es web más CMS a medida. El cliente arma su showroom, los visitantes llenan un carrito de selecciones que se convierte en pedido de cotización, y el dueño lo gestiona todo desde su panel de admin."</div>
+        <pre>Marketing website + custom CMS for a Florida remodeling contractor. Public showroom with a selection cart that turns into quote requests; full admin panel for inventory, categories, projects, orders, and curated reviews with a draft/publish workflow; JWT auth with forced first-login password rotation; three pricing models (per-area, per-unit, made-to-measure) with an order value estimator; layered anti-spam and hardened security headers. Next.js, TypeScript, PostgreSQL (Prisma).</pre>
+      </div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">9 · EasyTheraTools — PWA de ejercicios terapéuticos</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "El hermano de ETN: una PWA con 84 ejercicios terapéuticos interactivos en modos niño/adolescente/adulto y screeners clínicos validados como PHQ-9, GAD-7 y PCL-5, bilingüe inglés/español."</div>
+        <pre>Companion PWA to EasyTheraNotes: 84 interactive therapeutic exercises across kid/teen/adult modes, validated clinical screeners implemented as guided flows (PHQ-9, GAD-7, PCL-5, C-SSRS and 12 more), 31 clinician-side tools (safety plan, risk decision tree, note builder…), per-patient exercise assignment with a locked "patient mode", and AI session summaries. Bilingual EN/ES. React + TypeScript PWA (offline-capable), AWS CDK backend: DynamoDB, Lambda, API Gateway, Cognito, Stripe.</pre>
+      </div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">10 · ALE-LAO AI Bookkeeper</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "Mi laboratorio de IA aplicada a finanzas: le mandas una foto del recibo y la IA extrae vendor, monto y fecha; le escribes 'gasté $40 en gasolina ayer' y crea la transacción. Corre en mi propio VPS con auto-deploy."</div>
+        <pre>Self-hosted AI bookkeeping platform: transactions auto-categorized with GPT-4o-mini, receipt OCR via Claude Vision (vendor, amount, date, line items), natural-language commands that become transactions, P&amp;L and tax-deduction reports with PDF export, budget alerts, and n8n automation workflows (daily intelligence cron, Stripe sync, weekly email reports). Node.js/Express + React, PostgreSQL, Docker + Traefik on a VPS with webhook-driven auto-deploy.</pre>
+      </div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">11 · J&amp;E Next Level Drywall — landing bilingüe</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "Una landing bilingüe para un contratista de drywall en Tampa: slider de antes/después, botón de WhatsApp con mensaje pre-llenado y SEO local. 100% estática — hosting casi gratis para el cliente."</div>
+        <pre>Bilingual (EN/ES) one-page marketing site for a Tampa drywall contractor: before/after image comparison slider, click-to-call and WhatsApp CTAs with pre-filled messages, scroll-reveal animations, and local SEO metadata. Fully static Next.js export — zero server cost for the client.</pre>
+      </div>
+    </div>
+
+    <div class="copyblock">
+      <div class="cb-bar"><span class="cb-label">12 · Voiceover Studio — TTS self-hosted</span><button class="copy">Copiar</button></div>
+      <div class="cb-body">
+        <div class="pitch">💬 <b>Cómo hablarlo:</b> "Un estudio de texto-a-voz montado sobre el modelo open-source Kokoro, en mi propio VPS con Docker y Traefik. Corre solo en CPU y expone una API compatible con OpenAI."</div>
+        <pre>Self-hosted text-to-speech studio built on the open-source Kokoro-82M model. Dockerized deployment with Traefik reverse proxy, automatic HTTPS (Let's Encrypt), FastAPI backend, and an OpenAI-compatible speech API. Runs on CPU-only VPS hardware.</pre>
+      </div>
     </div>
   </section>
 
